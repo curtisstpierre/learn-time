@@ -1,4 +1,9 @@
-# Django settings for LearnTime project.
+import sys
+from os.path import abspath, dirname, join
+
+sys.path.insert(0, '../..')
+
+ROOT_PATH = abspath(dirname(__file__))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -114,7 +119,7 @@ INSTALLED_APPS = (
     'UserData',
     'Library',
     'south',
-    'gunicorn'
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging
