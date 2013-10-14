@@ -1,1 +1,1 @@
-web: gunicorn LearnTime/LearnTime/wsgi
+web: python LearnTime/manage.py run_gunicorn -b "0.0.0.0:$PORT"
