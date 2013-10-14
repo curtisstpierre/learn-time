@@ -13,7 +13,7 @@ DATABASES = {
 }
 
 STATIC_ROOT = (
-    "/home/curtis/Documents/learn-time/LearnTime/"
+    "/home/curtis/Documents/learn-time/LearnTime/static/"
 )
 
 DEBUG = True
