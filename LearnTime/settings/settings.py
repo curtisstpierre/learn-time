@@ -4,7 +4,9 @@ from os.path import abspath, dirname, join
 sys.path.insert(0, '../..')
 
 ROOT_PATH = abspath(dirname(__file__))
-
+# Django settings for beerApp project.
+# dbSuperUser: superUser
+# dbPSW : BeerMe@pp!
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -21,7 +23,8 @@ DATABASES = { 'default': dj_database_url.config() }
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Allow all host headers
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
@@ -64,6 +67,13 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    )
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
 )
 
 # List of finder classes that know how to find static files in
