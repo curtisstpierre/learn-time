@@ -1,7 +1,8 @@
 learnenv
 .settings
-/LearnTime/.project
-/LearnTime/.pydevproject
+/learntime/.project
+/learntime/.pydevproject
 *~
 *.pyc
 dev_*
+.vagrant*

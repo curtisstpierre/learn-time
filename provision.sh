@@ -1,6 +1,7 @@
 #!/bin/bash
 BASHRCFILE=/home/vagrant/.bashrc
 PROJECT=learntime
+SETTINGS=settings
 apt-get update
 apt-get -y install less gcc build-essential g++ libncurses5-dev openssl libssl-dev libxml2-dev libxslt1-dev zlib1g-dev libreadline-dev python-pip freetype* libpng* python-dev python-matplotlib libpq-dev python-dev
 
@@ -140,7 +141,7 @@ mkdir /var/venv
 virtualenv -p /opt/python27/bin/python /var/venv/$PROJECT
 export PATH=$PATH:/opt/postgres94/bin/
 export LD_LIBRARY_PATH=/opt/postgres94/lib/
-export DJANGO_SETTINGS_MODULE=$PROJECT.dev_vagrant
+export DJANGO_SETTINGS_MODULE=$SETTINGS.dev_vagrant
 
 grep -q 'export PATH=$PATH:/opt/postgres94/bin' $BASHRCFILE || echo 'export PATH=$PATH:/opt/postgres94/bin' >> $BASHRCFILE
 echo "PATH set"
@@ -150,7 +151,7 @@ grep -q 'export DJANGO_SETTINGS_MODULE=$PROJECT.dev_vagrant' $BASHRCFILE || echo
 echo "DJANGO_SETTINGS set"
 grep -q "alias ACTIVATE_$PROJECT='source /var/venv/$PROJECT/bin/activate'" $BASHRCFILE || echo "alias ACTIVATE_$PROJECT='source /var/venv/$PROJECT/bin/activate'" >> $BASHRCFILE
 echo "ACTIVATE script set"
-grep -q "alias START_$PROJECT='python /var/wwwapps/$PROJECT/$PROJECT/manage.py runserver 192.168.33.10:8000 --settings=$PROJECT.dev_vagrant'" $BASHRCFILE || echo "alias START_$PROJECT='python /var/wwwapps/$PROJECT/$PROJECT/manage.py runserver 192.168.33.10:8000 --settings=$PROJECT.dev_vagrant'" >> $BASHRCFILE
+grep -q "alias START_$PROJECT='python /var/wwwapps/$PROJECT/$PROJECT/manage.py runserver 192.168.33.10:8000 --settings=$SETTINGS.dev_vagrant'" $BASHRCFILE || echo "alias START_$PROJECT='python /var/wwwapps/$PROJECT/$PROJECT/manage.py runserver 192.168.33.10:8000 --settings=$SETTINGS.dev_vagrant'" >> $BASHRCFILE
 echo "Start script set"
 grep -q 'sudo -u postgres /opt/postgres94/bin/postgres -D /var/opt/postgres94/data -i > /var/opt/postgres94/postgres94.log 2>&1 &' /etc/rc.local || sed --in-place '/^exit 0/i\sudo -u postgres /opt/postgres94/bin/postgres -D /var/opt/postgres94/data -i > /var/opt/postgres94/postgres94.log 2>&1 &' /etc/rc.local
 echo "start postgres script set"
@@ -160,12 +161,12 @@ echo "Use ACTIVATE_$PROJECT to activate the virtual environment\n Use START_$PRO
 #Activate virtual env and install pip packages
 source /var/venv/$PROJECT/bin/activate
 cd /var/wwwapps/$PROJECT/
-sudo easy_install -U distribute
+easy_install -U distribute
 pip install -r requirements.txt
 
 #Syncronize database and add superuser
 cd $PROJECT
-python ./manage.py migrate --settings=$PROJECT.dev_vagrant --noinput
+python ./manage.py migrate --settings=$SETTINGS.dev_vagrant --noinput
 python -c "from django.db import DEFAULT_DB_ALIAS as database; from django.contrib.auth.models import User; User.objects.db_manager(database).create_superuser('root', 'root@aihs.ca', 'root')"
 #Start Django Server
 #echo "Server is starting"

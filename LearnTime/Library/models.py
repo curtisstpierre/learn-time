@@ -1,5 +1,6 @@
 from django.db import models
-from UserData.models import StudentData
+from userdata.models import StudentData
+
 
 class Book(models.Model):
     name = models.CharField(max_length=200)
@@ -12,10 +13,11 @@ class Book(models.Model):
         (MAGAZINE, 'Magazine'),
     )
     Type = models.CharField(max_length=3,
-                                      choices=TYPE,
-                                      default=COMICBOOK)
+                            choices=TYPE,
+                            default=COMICBOOK)
     students = models.ManyToManyField(StudentData, through='Borrow')
-    
+
+
 class Borrow(models.Model):
     student = models.ForeignKey(StudentData)
     course = models.ForeignKey(Book)
@@ -23,5 +25,6 @@ class Borrow(models.Model):
     duration = models.IntegerField(max_length=2)
     date_returned = models.DateField(blank=True)
     pub_date = models.DateTimeField('Date Entered')
+
     def __unicode__(self):
         return self.name

@@ -1,12 +1,16 @@
 from django.contrib import admin
-from UserData.models import StudentData, Offering, StudentCourse, Course, Teacher
+from userdata.models import StudentData, Offering, \
+    StudentCourse, Course, Teacher
+
 
 class StudentCourseInline(admin.TabularInline):
     model = StudentCourse
     extra = 1
-    
+
+
 class StudentAdmin(admin.ModelAdmin):
     inlines = (StudentCourseInline,)
+
 
 class OfferingAdmin(admin.ModelAdmin):
     inlines = (StudentCourseInline,)

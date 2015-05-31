@@ -1,1 +1,1 @@
-web: python LearnTime/manage.py run_gunicorn -b "0.0.0.0:$PORT"
+web: python learntime/manage.py run_gunicorn -b "0.0.0.0:$PORT"
