@@ -6,3 +6,4 @@ learnenv
 *.pyc
 dev_*
 .vagrant*
+*.sublime*
