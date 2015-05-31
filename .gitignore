@@ -3,3 +3,5 @@ learnenv
 /LearnTime/.project
 /LearnTime/.pydevproject
 *~
+*.pyc
+dev_*
